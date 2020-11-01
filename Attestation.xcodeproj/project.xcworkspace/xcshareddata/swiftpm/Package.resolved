@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Eureka",
+        "repositoryURL": "https://github.com/xmartlabs/Eureka",
+        "state": {
+          "branch": null,
+          "revision": "ae025915335f02e7277ed5446b4de002bab05866",
+          "version": "5.3.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

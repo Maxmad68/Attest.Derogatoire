@@ -12,7 +12,7 @@ struct DisplayAttestation {
 	var firstname: String!
 	var name: String!
 	var date: Date!
-	var motif: Int!
+	var motifs: [Int]!
 	var pdfName: String!
 }
 
@@ -39,12 +39,21 @@ class ListTableViewController: UITableViewController {
 			let firstName = cert["firstname"] as! String
 			let name = cert["name"] as! String
 			let date = cert["date"] as! Date
-			var motif = cert["motif"] as? Int
-			if motif == -1 {
-				motif = nil
+			
+			var motifs: [Int] = []
+			if cert["motif"] != nil {
+				let motif = cert["motif"] as! Int
+				if motif != -1 {
+					motifs.append(motif)
+				}
 			}
+			
+			if cert["motifs"] != nil {
+				motifs = cert["motifs"] as! [Int]
+			}
+			
 			let pdfName = cert["pdfName"] as! String
-			let display = DisplayAttestation(firstname: firstName, name: name, date: date, motif: motif, pdfName: pdfName)
+			let display = DisplayAttestation(firstname: firstName, name: name, date: date, motifs: motifs, pdfName: pdfName)
 			self.list.append(display)
 		}
 		
@@ -111,7 +120,7 @@ class ListTableViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "attestationCell", for: indexPath) as! AttestationDisplayCell
 		
 		// Present
-		cell.setBadge(motif: data.motif)
+		cell.setBadge(motifs: data.motifs)
 		cell.nameLabel?.text = "\(data.firstname ?? "") \(data.name ?? "")"
 		cell.dateLabel?.text = "\(outDateString) à \(outHourString)"
 		

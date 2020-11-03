@@ -17,7 +17,7 @@ class GenerateViewController: FormViewController {
 		
 		AppDelegate.main.generateViewController = self
 		
-		
+		// Get date
 		let date = Date()
 		
 		var hour = Calendar.current.component(.hour, from: date)
@@ -27,6 +27,15 @@ class GenerateViewController: FormViewController {
 		if (minute >= 60) {
 			minute = minute - 60
 			hour += 1
+		}
+		
+		// Get last motifs
+		var lastMotifsTitles: Set<String>
+		if let lastMotifs = UserDefaults.standard.object(forKey: "Last Motifs") {
+			let lastMotifsArray = lastMotifs as! [Int]
+			lastMotifsTitles = Set(lastMotifsArray.map{GenerateViewController.motifs[$0]})
+		} else {
+			lastMotifsTitles = [GenerateViewController.motifs[5]]
 		}
 		
 		// Render form
@@ -114,17 +123,15 @@ class GenerateViewController: FormViewController {
 			
 			
 
-			<<< PushRow<String>() {
+			<<< MultipleSelectorRow<String>() {
 				$0.title = "Motif"
 				$0.options = GenerateViewController.motifs
-				$0.value = GenerateViewController.motifs[GetDefaultValue("Last Motif", 5) as! Int]
-				$0.tag = "motif"
+				$0.value = lastMotifsTitles
+				$0.tag = "motifs"
 				$0.selectorTitle = "Choisir un motif:"
 			}
 			.onPresent { from, to in
-				to.dismissOnSelection = true
-				to.dismissOnChange = true
-				to.enableDeselection = false
+				
 				
 				to.selectableRowSetup = { row in
 					row.cellProvider = CellProvider<ListCheckCell<String>>(nibName: "MotifCell", bundle: Bundle.main)
@@ -173,12 +180,16 @@ class GenerateViewController: FormViewController {
 		attestation.city = values["city"] as? String ?? ""
 		attestation.address = values["address"] as? String ?? ""
 		attestation.postCode = values["cp"] as? String ?? ""
-		print (values["motif"] as? String)
-		if let motString = values["motif"] as? String {
-			attestation.motif = GenerateViewController.motifs.firstIndex(of: motString)
-		} else {
-			attestation.motif = nil
+		
+		let motifs = values["motifs"]
+		
+		attestation.motifs = []
+		for motif in Array(motifs as! Set<String>) {
+			attestation.motifs.append(
+				GenerateViewController.motifs.firstIndex(of: motif)!
+			)
 		}
+		
 		
 		let outTime = values["hour"] as! Date
 		let hour = Calendar.current.component(.hour, from: outTime)
@@ -224,7 +235,7 @@ class GenerateViewController: FormViewController {
 		UserDefaults.standard.set(attestation.city, forKey: "Last City")
 		UserDefaults.standard.set(attestation.birthday, forKey: "Last Birthday")
 		UserDefaults.standard.set(attestation.birthPlace, forKey: "Last Birth Place")
-		UserDefaults.standard.set(attestation.motif, forKey: "Last Motif")
+		UserDefaults.standard.set(attestation.motifs, forKey: "Last Motifs")
 		UserDefaults.standard.synchronize()
 
 	}

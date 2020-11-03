@@ -22,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			UserDefaults.standard.set([], forKey: "Certificates")
 		}
 		
+		// Update "Last Motif" to multiple selection
+		if let lm = UserDefaults.standard.object(forKey: "Last Motif") {
+			UserDefaults.standard.set([lm], forKey: "Last Motifs")
+			UserDefaults.standard.removeObject(forKey: "Last Motif")
+		}
+		
 		// Create documents directory if doesn't exist
 		let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
 		print (documents.first!)

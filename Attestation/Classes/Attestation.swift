@@ -21,7 +21,7 @@ class Attestation {
 	
 	var outDate: Date? = nil
 	
-	var motif: Int? = nil
+	var motifs: [Int] = []
 	
 	init() {}
 	
@@ -55,9 +55,10 @@ class Attestation {
 		page1?.drawText(outHourString, x: 264, y: 153 - 9)
 		
 		// Tick motifs
-		if motif != nil {
+		
+		for motif in motifs {
 			let yTicks = [578, 533, 477, 435, 396, 358, 295, 255, 211]
-			let chosenY = yTicks[motif!]
+			let chosenY = yTicks[motif]
 			
 			page1?.drawText("x", x: 76, y: chosenY - 4, size: 18)
 		}
@@ -106,12 +107,11 @@ class Attestation {
 		let outHourString2 = formatter.string(from: outDate!)
 		
 		// Get motifs string
-		var motifsString: String
-		if motif != nil {
-			motifsString = ["travail","achats","sante","famille","handicap","sport_animaux","convocation","missions","enfants"][motif!]
-		} else { // TODO: Make this better
-			motifsString = ""
+		var motifsStrings: [String] = []
+		for motif in self.motifs {
+			motifsStrings.append(["travail","achats","sante","famille","handicap","sport_animaux","convocation","missions","enfants"][motif])
 		}
+		let motifsString = motifsStrings.joined(separator: ", ")
 		
 		// Get whole string
 		let string = "Cree le: \(outDateString) a \(outHourString);\n Nom: \(name ?? "Unknown");\n Prenom: \(firstName ?? "Unknown");\n Naissance: \(bDate) a \(birthPlace ?? "Unknown");\n Adresse: \(addressText);\n Sortie: \(outDateString) a \(outHourString2);\n Motifs: \(motifsString)"
@@ -140,8 +140,7 @@ class Attestation {
 	///		- filename (String) : Filename of the PDF file
 	///
 	func WriteToDefaults(filename: String) {
-		print (name)
-		let dict: [String: Any?] = ["firstname": firstName, "name": name, "date": outDate, "motif": motif ?? -1, "pdfName": filename]
+		let dict: [String: Any?] = ["firstname": firstName, "name": name, "date": outDate, "motifs": motifs , "pdfName": filename]
 		
 		var certDefaults = UserDefaults.standard.array(forKey: "Certificates")
 		certDefaults?.insert(dict, at: 0)

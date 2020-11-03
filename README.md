@@ -1,7 +1,8 @@
 # Attest.Derogatoire
-Générateur d'attestations dérogatoires de déplacement pour le confinement de la 2e vague de la COVID-19
+Générateur d'attestations dérogatoires de déplacement sur iOS.<br/>
+<img src="http://madrau.fr/Github-AD/screen1.png" height="500px"/>
 
-<br/><br/>
+<br/>
 L'application est en cours de vérification sur l'AppStore, mais ce dernier n'apprécie par trop tout ce qui "contient des références à la COVID19".<br/>
 
 ## Comment utiliser?

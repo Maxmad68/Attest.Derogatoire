@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C27E385254F0F5400ED4251 /* attestation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C27E384254F0F5400ED4251 /* attestation.pdf */; };
 		9C584BA1254E11DE009E81BB /* MotifCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C584BA0254E11DE009E81BB /* MotifCell.xib */; };
 		9C584BA5254E122D009E81BB /* MotifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C584BA4254E122D009E81BB /* MotifCell.swift */; };
 		9C8FF276254C8849000137D4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF275254C8849000137D4 /* AppDelegate.swift */; };
@@ -24,12 +23,12 @@
 		9C8FF2C3254D846E000137D4 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2C2254D846E000137D4 /* ListTableViewController.swift */; };
 		9C8FF2CC254DA8E1000137D4 /* AttestationDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */; };
 		9C8FF2D6254DB61F000137D4 /* PDFImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */; };
+		9C9836012550A3AA0023052A /* attestation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C9836002550A3AA0023052A /* attestation.pdf */; };
 		9CF87D45254EC372000358FC /* PDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D44254EC372000358FC /* PDFPage.swift */; };
 		9CF87D48254EC38F000358FC /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D47254EC38F000358FC /* UIDevice.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9C27E384254F0F5400ED4251 /* attestation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = attestation.pdf; sourceTree = "<group>"; };
 		9C584BA0254E11DE009E81BB /* MotifCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotifCell.xib; sourceTree = "<group>"; };
 		9C584BA4254E122D009E81BB /* MotifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotifCell.swift; sourceTree = "<group>"; };
 		9C8FF272254C8849000137D4 /* Attestation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Attestation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +47,7 @@
 		9C8FF2C5254D8485000137D4 /* Attestation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Attestation.entitlements; sourceTree = "<group>"; };
 		9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationDisplayCell.swift; sourceTree = "<group>"; };
 		9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFImageAnnotation.swift; sourceTree = "<group>"; };
+		9C9836002550A3AA0023052A /* attestation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = attestation.pdf; path = ../../../../../Downloads/attestation.pdf; sourceTree = "<group>"; };
 		9CF87D44254EC372000358FC /* PDFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPage.swift; sourceTree = "<group>"; };
 		9CF87D47254EC38F000358FC /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,7 +93,7 @@
 				9C8FF2D4254DB601000137D4 /* Classes */,
 				9CF87D43254EC360000358FC /* Extensions */,
 				9C8FF2B2254CB800000137D4 /* Functions.swift */,
-				9C27E384254F0F5400ED4251 /* attestation.pdf */,
+				9C9836002550A3AA0023052A /* attestation.pdf */,
 				9C8FF27B254C8849000137D4 /* Main.storyboard */,
 				9C8FF27E254C884B000137D4 /* Assets.xcassets */,
 				9C8FF280254C884B000137D4 /* LaunchScreen.storyboard */,
@@ -213,9 +213,9 @@
 			files = (
 				9C584BA1254E11DE009E81BB /* MotifCell.xib in Resources */,
 				9C8FF282254C884B000137D4 /* LaunchScreen.storyboard in Resources */,
-				9C27E385254F0F5400ED4251 /* attestation.pdf in Resources */,
 				9C8FF27F254C884B000137D4 /* Assets.xcassets in Resources */,
 				9C8FF27D254C8849000137D4 /* Main.storyboard in Resources */,
+				9C9836012550A3AA0023052A /* attestation.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +386,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Attestation/Attestation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42.3.5;
+				CURRENT_PROJECT_VERSION = 42.4.1;
 				DEVELOPMENT_TEAM = 6QFSV6DH55;
 				INFOPLIST_FILE = Attestation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -394,7 +394,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 42.3;
+				MARKETING_VERSION = 42.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.Attestation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -410,7 +410,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Attestation/Attestation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42.3.5;
+				CURRENT_PROJECT_VERSION = 42.4.1;
 				DEVELOPMENT_TEAM = 6QFSV6DH55;
 				INFOPLIST_FILE = Attestation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -418,7 +418,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 42.3;
+				MARKETING_VERSION = 42.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.Attestation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

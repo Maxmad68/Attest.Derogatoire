@@ -23,7 +23,8 @@
 		9C8FF2C3254D846E000137D4 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2C2254D846E000137D4 /* ListTableViewController.swift */; };
 		9C8FF2CC254DA8E1000137D4 /* AttestationDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */; };
 		9C8FF2D6254DB61F000137D4 /* PDFImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */; };
-		9C9F6B3725517C7300FCF25B /* attestation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9C9F6B3625517C7300FCF25B /* attestation.pdf */; };
+		9CD109EB2555EB5900EA46E2 /* attestation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9CD109EA2555EB5900EA46E2 /* attestation.pdf */; };
+		9CD109F72555F5C100EA46E2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD109F62555F5C100EA46E2 /* TabBarController.swift */; };
 		9CF87D45254EC372000358FC /* PDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D44254EC372000358FC /* PDFPage.swift */; };
 		9CF87D48254EC38F000358FC /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D47254EC38F000358FC /* UIDevice.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +48,8 @@
 		9C8FF2C5254D8485000137D4 /* Attestation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Attestation.entitlements; sourceTree = "<group>"; };
 		9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationDisplayCell.swift; sourceTree = "<group>"; };
 		9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFImageAnnotation.swift; sourceTree = "<group>"; };
-		9C9F6B3625517C7300FCF25B /* attestation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = attestation.pdf; sourceTree = "<group>"; };
+		9CD109EA2555EB5900EA46E2 /* attestation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = attestation.pdf; sourceTree = "<group>"; };
+		9CD109F62555F5C100EA46E2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9CF87D44254EC372000358FC /* PDFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPage.swift; sourceTree = "<group>"; };
 		9CF87D47254EC38F000358FC /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,7 +95,7 @@
 				9C8FF2D4254DB601000137D4 /* Classes */,
 				9CF87D43254EC360000358FC /* Extensions */,
 				9C8FF2B2254CB800000137D4 /* Functions.swift */,
-				9C9F6B3625517C7300FCF25B /* attestation.pdf */,
+				9CD109EA2555EB5900EA46E2 /* attestation.pdf */,
 				9C8FF27B254C8849000137D4 /* Main.storyboard */,
 				9C8FF27E254C884B000137D4 /* Assets.xcassets */,
 				9C8FF280254C884B000137D4 /* LaunchScreen.storyboard */,
@@ -116,6 +118,7 @@
 				9C8FF279254C8849000137D4 /* GenerateViewController.swift */,
 				9C8FF2C2254D846E000137D4 /* ListTableViewController.swift */,
 				9C8FF2BC254D7505000137D4 /* PDFViewController.swift */,
+				9CD109F62555F5C100EA46E2 /* TabBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -213,9 +216,9 @@
 			files = (
 				9C584BA1254E11DE009E81BB /* MotifCell.xib in Resources */,
 				9C8FF282254C884B000137D4 /* LaunchScreen.storyboard in Resources */,
-				9C9F6B3725517C7300FCF25B /* attestation.pdf in Resources */,
 				9C8FF27F254C884B000137D4 /* Assets.xcassets in Resources */,
 				9C8FF27D254C8849000137D4 /* Main.storyboard in Resources */,
+				9CD109EB2555EB5900EA46E2 /* attestation.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C8FF27A254C8849000137D4 /* GenerateViewController.swift in Sources */,
+				9CD109F72555F5C100EA46E2 /* TabBarController.swift in Sources */,
 				9C8FF276254C8849000137D4 /* AppDelegate.swift in Sources */,
 				9C584BA5254E122D009E81BB /* MotifCell.swift in Sources */,
 				9C8FF278254C8849000137D4 /* SceneDelegate.swift in Sources */,
@@ -386,7 +390,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Attestation/Attestation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 6QFSV6DH55;
 				INFOPLIST_FILE = Attestation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -394,8 +398,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 42.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.Attestation;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.certificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -410,7 +414,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Attestation/Attestation.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 42.4.1;
+				CURRENT_PROJECT_VERSION = 1.0.1;
 				DEVELOPMENT_TEAM = 6QFSV6DH55;
 				INFOPLIST_FILE = Attestation/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -418,8 +422,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 42.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.Attestation;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.certificate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;

@@ -19,6 +19,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		guard let _ = (scene as? UIWindowScene) else { return }
 	}
 
+	func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+		
+		let components = NSURLComponents(url: URLContexts.first!.url, resolvingAgainstBaseURL: true)
+		let action = components?.host
+		
+		for item in components!.queryItems! {
+			AppDelegate.main.preloadProperties[item.name] = item.value
+		}
+		
+		AppDelegate.main.preloadProperties["preGenerate"] = action == "generate"
+		
+		if let vc = AppDelegate.main.generateViewController {
+			vc.preload()
+		}
+	}
+	
 	func sceneDidDisconnect(_ scene: UIScene) {
 		// Called as the scene is being released by the system.
 		// This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -39,6 +55,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	func sceneWillEnterForeground(_ scene: UIScene) {
 		// Called as the scene transitions from the background to the foreground.
 		// Use this method to undo the changes made on entering the background.
+		if let generateVC = AppDelegate.main.generateViewController {
+			generateVC.reloadDates()
+		}
 	}
 
 	func sceneDidEnterBackground(_ scene: UIScene) {

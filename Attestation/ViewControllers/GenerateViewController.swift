@@ -17,18 +17,6 @@ class GenerateViewController: FormViewController {
 		
 		AppDelegate.main.generateViewController = self
 		
-		// Get date
-		let date = Date()
-		
-		var hour = Calendar.current.component(.hour, from: date)
-		var minute = Calendar.current.component(.minute, from: date)
-		
-		minute += 2
-		if (minute >= 60) {
-			minute = minute - 60
-			hour += 1
-		}
-		
 		// Get last motifs
 		var lastMotifsTitles: Set<String>
 		if let lastMotifs = UserDefaults.standard.object(forKey: "Last Motifs") {
@@ -42,7 +30,7 @@ class GenerateViewController: FormViewController {
 		
 		form +++ Section("Identité")
 		
-			<<< TextRow() {
+			<<< NameRow() {
 				$0.title = "Nom"
 				$0.value = GetDefaultValue("Last Name", "Macron") as? String
 				$0.tag = "name"
@@ -50,7 +38,7 @@ class GenerateViewController: FormViewController {
 				$0.validationOptions = .validatesOnChange
 			}
 			
-			<<< TextRow() {
+			<<< NameRow() {
 				$0.title = "Prénom"
 				$0.value = GetDefaultValue("Last Firstname", "Emmanuel") as? String
 				$0.tag = "firstname"
@@ -114,7 +102,7 @@ class GenerateViewController: FormViewController {
 			
 			<<< TimeInlineRow(){
 				$0.title = "Heure de sortie"
-				$0.value = Calendar.current.date(from: DateComponents.init(calendar: Calendar.current,hour: hour, minute: minute))
+				$0.value = Date()
 				$0.tag = "hour"
 				$0.add(rule: RuleRequired())
 				$0.validationOptions = .validatesOnChange
@@ -124,11 +112,11 @@ class GenerateViewController: FormViewController {
 			
 
 			<<< MultipleSelectorRow<String>() {
-				$0.title = "Motif"
+				$0.title = "Motifs"
 				$0.options = GenerateViewController.motifs
 				$0.value = lastMotifsTitles
 				$0.tag = "motifs"
-				$0.selectorTitle = "Choisir un motif:"
+				$0.selectorTitle = "Choisir un/des motif:"
 			}
 			.onPresent { from, to in
 				
@@ -162,6 +150,17 @@ class GenerateViewController: FormViewController {
 			}.onCellSelection { [weak self] (cell, row) in
 				self?.generate()
 			}
+		
+		self.preload()
+	}
+	
+	
+	func reloadDates() {
+		
+		if let cell = self.form.rowBy(tag: "hour") as? TimeInlineRow {
+			cell.value = Date()
+			cell.reload()
+		}
 	}
 	
 	/// User tapped "Generate" button:
@@ -169,7 +168,7 @@ class GenerateViewController: FormViewController {
 	///
 	func generate() {
 		let values = form.values()
-		print (values)
+		//print (values)
 		
 		// Make Attestation instance
 		let attestation = Attestation()
@@ -195,9 +194,30 @@ class GenerateViewController: FormViewController {
 		let hour = Calendar.current.component(.hour, from: outTime)
 		let min = Calendar.current.component(.minute, from: outTime)
 		
+		
+		
 		let outDateRaw = values["date"] as! Date
 		attestation.outDate = Calendar.current.date(bySettingHour: hour, minute: min, second: 0, of: outDateRaw)!
 		
+		let timeSince = Date().timeIntervalSince(attestation.outDate!)
+		
+		if timeSince > 60 { // More than 1 min: show alert
+			let alert = UIAlertController(title: "Date dépassée", message: "La date/heure de sortie indiquée est dépassée de plus de 1 minute.", preferredStyle: .alert)
+			
+			alert.addAction(UIAlertAction(title: "Continuer", style: .default, handler:  { action in
+				self.ContinueGenerating(attestation: attestation)
+			}))
+			alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
+			
+			self.present(alert, animated: true)
+		} else {
+			self.ContinueGenerating(attestation: attestation)
+		}
+		
+	}
+	
+	
+	func ContinueGenerating(attestation: Attestation) {
 		let doc = attestation.generate()
 		
 		
@@ -237,7 +257,70 @@ class GenerateViewController: FormViewController {
 		UserDefaults.standard.set(attestation.birthPlace, forKey: "Last Birth Place")
 		UserDefaults.standard.set(attestation.motifs, forKey: "Last Motifs")
 		UserDefaults.standard.synchronize()
+	}
+	
+	
+	
+	func preload() {
+		
+		let preloadProperties = AppDelegate.main.preloadProperties
+		
+		
+		if let address = preloadProperties["address"] {
+			if let cell = self.form.rowBy(tag: "address") as? TextRow {
+				cell.value = address as! String
+				cell.reload()
+			}
+		}
+		
+		if let cp = preloadProperties["cp"] {
+			if let cell = self.form.rowBy(tag: "cp") as? ZipCodeRow {
+				cell.value = cp as! String
+				cell.reload()
+			}
+		}
+		
+		if let city = preloadProperties["city"] {
+			if let cell = self.form.rowBy(tag: "city") as? TextRow {
+				cell.value = city as! String
+				cell.reload()
+			}
+		}
+		
+		if let firstname = preloadProperties["firstname"] {
+			if let cell = self.form.rowBy(tag: "firstname") as? TextRow {
+				cell.value = firstname as! String
+				cell.reload()
+			}
+		}
+		
+		if let name = preloadProperties["name"] {
+			if let cell = self.form.rowBy(tag: "name") as? TextRow {
+				cell.value = name as! String
+				cell.reload()
+			}
+		}
+		
+		if let birthday = preloadProperties["birthday"] {
+			if let cell = self.form.rowBy(tag: "birthday") as? DateInlineRow {
 
+				let dateFormatter = DateFormatter()
+				dateFormatter.locale = Locale(identifier: "fr_FR")
+				dateFormatter.dateFormat = "yyyy-MM-dd"
+				let date = dateFormatter.date(from:birthday as! String)!
+				
+				cell.value = date
+				cell.reload()
+			}
+		}
+		
+		if let birthplace = preloadProperties["birthplace"] {
+			if let cell = self.form.rowBy(tag: "birthplace") as? TextRow {
+				cell.value = birthplace as! String
+				cell.reload()
+			}
+		}
+		
 	}
 
 

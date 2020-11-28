@@ -12,13 +12,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 	var window: UIWindow?
 
 
-	func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-		// Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-		// If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-		// This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-		guard let _ = (scene as? UIWindowScene) else { return }
-	}
-
 	func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
 		
 		let components = NSURLComponents(url: URLContexts.first!.url, resolvingAgainstBaseURL: true)
@@ -33,6 +26,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		if let vc = AppDelegate.main.generateViewController {
 			vc.preload()
 		}
+	}
+	
+	func scene(_ scene: UIScene,
+			   willConnectTo session: UISceneSession,
+			   options connectionOptions: UIScene.ConnectionOptions) {
+		
+		// Determine who sent the URL.
+		if let urlContext = connectionOptions.urlContexts.first {
+			
+			let components = NSURLComponents(url: urlContext.url, resolvingAgainstBaseURL: true)
+			let action = components?.host
+			
+			for item in components!.queryItems! {
+				AppDelegate.main.preloadProperties[item.name] = item.value
+			}
+			
+			AppDelegate.main.preloadProperties["preGenerate"] = action == "generate"
+			
+			if let vc = AppDelegate.main.generateViewController {
+				vc.preload()
+			}
+			
+			// Process the URL similarly to the UIApplicationDelegate example.
+		}
+		
+		/*
+		*
+		*/
 	}
 	
 	func sceneDidDisconnect(_ scene: UIScene) {

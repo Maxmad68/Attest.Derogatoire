@@ -147,4 +147,40 @@ class ListTableViewController: UITableViewController {
 		pdfVc.filename = docURL.absoluteString
 	}
 	
+	@IBAction func removeAll(_ sender: Any) {
+		let alert = UIAlertController(title: "Tout effacer?", message: "Ça va être tout blanc", preferredStyle: .actionSheet)
+		
+		alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { action in
+			
+			var idx = 0
+			for data in self.list {
+				// Delete pdf
+				let documents = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+				let documentsDirectory = documents.first
+				var docURL = URL(string: documentsDirectory!)!
+				docURL.appendPathComponent(data.pdfName)
+				
+				do {
+					print (docURL.absoluteURL)
+					try FileManager.default.removeItem(atPath: docURL.absoluteString)
+				} catch {
+					print ("Err")
+				}
+				
+				idx += 1
+			}
+			
+			// Clean defaults entry
+			UserDefaults.standard.set([], forKey: "Certificates")
+			
+			self.list = []
+			
+			self.tableView.reloadData()
+			
+		}))
+		alert.addAction(UIAlertAction(title: "Non", style: .cancel, handler: nil))
+		
+		self.present(alert, animated: true)
+	}
+	
 }

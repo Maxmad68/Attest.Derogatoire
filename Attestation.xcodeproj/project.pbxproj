@@ -23,11 +23,24 @@
 		9C8FF2C3254D846E000137D4 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2C2254D846E000137D4 /* ListTableViewController.swift */; };
 		9C8FF2CC254DA8E1000137D4 /* AttestationDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */; };
 		9C8FF2D6254DB61F000137D4 /* PDFImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */; };
-		9CD109EB2555EB5900EA46E2 /* attestation.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9CD109EA2555EB5900EA46E2 /* attestation.pdf */; };
 		9CD109F72555F5C100EA46E2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD109F62555F5C100EA46E2 /* TabBarController.swift */; };
+		9CE449E62571C8A7008331EC /* template.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 9CE449E52571C8A7008331EC /* template.pdf */; };
 		9CF87D45254EC372000358FC /* PDFPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D44254EC372000358FC /* PDFPage.swift */; };
 		9CF87D48254EC38F000358FC /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF87D47254EC38F000358FC /* UIDevice.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9CD877022556A4D800C29821 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9C584BA0254E11DE009E81BB /* MotifCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MotifCell.xib; sourceTree = "<group>"; };
@@ -48,8 +61,8 @@
 		9C8FF2C5254D8485000137D4 /* Attestation.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Attestation.entitlements; sourceTree = "<group>"; };
 		9C8FF2CB254DA8E1000137D4 /* AttestationDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttestationDisplayCell.swift; sourceTree = "<group>"; };
 		9C8FF2D5254DB61F000137D4 /* PDFImageAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFImageAnnotation.swift; sourceTree = "<group>"; };
-		9CD109EA2555EB5900EA46E2 /* attestation.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = attestation.pdf; sourceTree = "<group>"; };
 		9CD109F62555F5C100EA46E2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		9CE449E52571C8A7008331EC /* template.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = template.pdf; sourceTree = "<group>"; };
 		9CF87D44254EC372000358FC /* PDFPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFPage.swift; sourceTree = "<group>"; };
 		9CF87D47254EC38F000358FC /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -95,7 +108,7 @@
 				9C8FF2D4254DB601000137D4 /* Classes */,
 				9CF87D43254EC360000358FC /* Extensions */,
 				9C8FF2B2254CB800000137D4 /* Functions.swift */,
-				9CD109EA2555EB5900EA46E2 /* attestation.pdf */,
+				9CE449E52571C8A7008331EC /* template.pdf */,
 				9C8FF27B254C8849000137D4 /* Main.storyboard */,
 				9C8FF27E254C884B000137D4 /* Assets.xcassets */,
 				9C8FF280254C884B000137D4 /* LaunchScreen.storyboard */,
@@ -161,6 +174,7 @@
 				9C8FF26E254C8849000137D4 /* Sources */,
 				9C8FF26F254C8849000137D4 /* Frameworks */,
 				9C8FF270254C8849000137D4 /* Resources */,
+				9CD877022556A4D800C29821 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
@@ -218,7 +232,7 @@
 				9C8FF282254C884B000137D4 /* LaunchScreen.storyboard in Resources */,
 				9C8FF27F254C884B000137D4 /* Assets.xcassets in Resources */,
 				9C8FF27D254C8849000137D4 /* Main.storyboard in Resources */,
-				9CD109EB2555EB5900EA46E2 /* attestation.pdf in Resources */,
+				9CE449E62571C8A7008331EC /* template.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,7 +413,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.certificate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.attestation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
@@ -423,7 +437,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.certificate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.madrau.attestation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;

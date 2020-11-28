@@ -127,15 +127,15 @@ class GenerateViewController: FormViewController {
 				to.selectableRowCellUpdate = { cell, row in
 					var detailText: String?
 					switch row.selectableValue {
-					case "Travail": detailText = "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation, déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen"
-					case "Achats": detailText = "Déplacements pour effectuer des achats de fournitures nécessaires à l'activité professionnelle, des achats de première nécessité dans des établissements dont les activités demeurent autorisées, le retrait de commande et les livraisons à domicile"
+					case "Travail": detailText = "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation ; déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen"
+					case "Achats": detailText = "Déplacements pour se rendre dans un établissement culturel autorisé ou un lieu de culte ; déplacements pour effectuer des achats de biens, pour des services dont la fourniture est autorisée, pour les retraits de commandes et les livraisons à domicile"
 					case "Santé": detailText = "Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments"
 					case "Famille": detailText = "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires ou la garde d'enfants"
-					case "Accompagnement": detailText = "Déplacement des personnes en situation de handicap et leur accompagnant"
-					case "Sport/Animaux": detailText = "Déplacements brefs, dans la limite d'une heure quotidienne et dans un rayon maximal d'un kilomètre autour du domicile, liés soit à l'activité physique individuelle des personnes, à l'exclusion de toute pratique sportive collective et de toute proximité avec d'autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie"
-					case "Convocation": detailText = "Convocation judiciaire ou administrative et pour se rendre dans un service public"
+					case "Accompagnement": detailText = "Déplacements des personnes en situation de handicap et leur accompagnant"
+					case "Sport/Animaux": detailText = "Déplacements en plein air ou vers un lieu de plein air, sans changement du lieu de résidence, dans la limite de trois heures quotidiennes et dans un rayon maximal de vingt kilomètres autour du domicile, liés soit à l’activité physique ou aux loisirs individuels, à l’exclusion de toute pratique sportive collective et de toute proximité avec d’autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie"
+					case "Convocation": detailText = "Convocations judiciaires ou administratives et déplacements pour se rendre dans un service public"
 					case "Missions": detailText = "Participation à des missions d'intérêt général sur demande de l'autorité administrative"
-					case "Enfants": detailText = "Déplacement pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires"
+					case "Enfants": detailText = "Déplacements pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires"
 					default: detailText = ""
 					}
 					(cell as! MotifCell).detailTextLabel!.text = detailText
@@ -201,7 +201,7 @@ class GenerateViewController: FormViewController {
 		
 		let timeSince = Date().timeIntervalSince(attestation.outDate!)
 		
-		if timeSince > 60 { // More than 1 min: show alert
+		if timeSince > 119 { // More than 1 min: show alert
 			let alert = UIAlertController(title: "Date dépassée", message: "La date/heure de sortie indiquée est dépassée de plus de 1 minute.", preferredStyle: .alert)
 			
 			alert.addAction(UIAlertAction(title: "Continuer", style: .default, handler:  { action in
@@ -260,7 +260,7 @@ class GenerateViewController: FormViewController {
 	}
 	
 	
-	
+	// Open from URL
 	func preload() {
 		
 		let preloadProperties = AppDelegate.main.preloadProperties
@@ -268,35 +268,35 @@ class GenerateViewController: FormViewController {
 		
 		if let address = preloadProperties["address"] {
 			if let cell = self.form.rowBy(tag: "address") as? TextRow {
-				cell.value = address as! String
+				cell.value = (address as! String)
 				cell.reload()
 			}
 		}
 		
 		if let cp = preloadProperties["cp"] {
 			if let cell = self.form.rowBy(tag: "cp") as? ZipCodeRow {
-				cell.value = cp as! String
+				cell.value = (cp as! String)
 				cell.reload()
 			}
 		}
 		
 		if let city = preloadProperties["city"] {
 			if let cell = self.form.rowBy(tag: "city") as? TextRow {
-				cell.value = city as! String
+				cell.value = (city as! String)
 				cell.reload()
 			}
 		}
 		
 		if let firstname = preloadProperties["firstname"] {
-			if let cell = self.form.rowBy(tag: "firstname") as? TextRow {
-				cell.value = firstname as! String
+			if let cell = self.form.rowBy(tag: "firstname") as? NameRow {
+				cell.value = (firstname as! String)
 				cell.reload()
 			}
 		}
 		
 		if let name = preloadProperties["name"] {
-			if let cell = self.form.rowBy(tag: "name") as? TextRow {
-				cell.value = name as! String
+			if let cell = self.form.rowBy(tag: "name") as? NameRow {
+				cell.value = (name as! String)
 				cell.reload()
 			}
 		}
@@ -316,9 +316,35 @@ class GenerateViewController: FormViewController {
 		
 		if let birthplace = preloadProperties["birthplace"] {
 			if let cell = self.form.rowBy(tag: "birthplace") as? TextRow {
-				cell.value = birthplace as! String
+				cell.value = (birthplace as! String)
 				cell.reload()
 			}
+		}
+		
+		if let motifsRaw = preloadProperties["motifs"] {
+			
+			var motifs = Int(motifsRaw as! String)!
+
+			
+			var motifsList = [String]()
+			var bitIdx = 0
+			while motifs > 0 {
+				let bit = motifs % 2
+				motifs >>= 1
+				if bit == 1 {
+					motifsList.append(GenerateViewController.motifs[bitIdx])
+				}
+				bitIdx += 1
+			}
+			
+			if let cell = self.form.rowBy(tag: "motifs") as? MultipleSelectorRow<String> {
+				cell.value = Set(motifsList)
+				cell.reload()
+			}
+		}
+		
+		if preloadProperties["preGenerate", default: false] as! Bool {
+			generate()
 		}
 		
 	}

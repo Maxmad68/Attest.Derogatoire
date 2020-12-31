@@ -138,7 +138,7 @@ class Attestation {
 		// Get motifs string
 		var motifsStrings: [String] = []
 		for motif in self.motifs {
-			motifsStrings.append(["travail","achats","sante","famille","handicap","sport_animaux","convocation","missions","enfants"][motif])
+			motifsStrings.append(["travail","achats_culturel_cultuel","sante","famille","handicap","sport_animaux","convocation","missions","enfants"][motif])
 		}
 		let motifsString = motifsStrings.joined(separator: ", ")
 		

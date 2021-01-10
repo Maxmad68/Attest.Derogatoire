@@ -10,7 +10,7 @@ import Eureka
 
 class GenerateViewController: FormViewController {
 
-	static let motifs = ["Travail", "Achats", "Santé", "Famille", "Accompagnement", "Sport/Animaux", "Convocation", "Missions", "Enfants"]
+	static let motifs = ["Travail", "Santé", "Famille", "Accompagnement", "Convocation", "Missions", "Transport", "Animaux"]
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -127,15 +127,23 @@ class GenerateViewController: FormViewController {
 				to.selectableRowCellUpdate = { cell, row in
 					var detailText: String?
 					switch row.selectableValue {
-					case "Travail": detailText = "Déplacements entre le domicile et le lieu d’exercice de l’activité professionnelle ou un établissement d’enseignement ou de formation ; déplacements professionnels ne pouvant être différés, déplacements pour un concours ou un examen"
-					case "Achats": detailText = "Déplacements pour se rendre dans un établissement culturel autorisé ou un lieu de culte ; déplacements pour effectuer des achats de biens, pour des services dont la fourniture est autorisée, pour les retraits de commandes et les livraisons à domicile"
-					case "Santé": detailText = "Consultations, examens et soins ne pouvant être assurés à distance et l’achat de médicaments"
-					case "Famille": detailText = "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables et précaires ou la garde d'enfants"
-					case "Accompagnement": detailText = "Déplacements des personnes en situation de handicap et leur accompagnant"
-					case "Sport/Animaux": detailText = "Déplacements en plein air ou vers un lieu de plein air, sans changement du lieu de résidence, dans la limite de trois heures quotidiennes et dans un rayon maximal de vingt kilomètres autour du domicile, liés soit à l’activité physique ou aux loisirs individuels, à l’exclusion de toute pratique sportive collective et de toute proximité avec d’autres personnes, soit à la promenade avec les seules personnes regroupées dans un même domicile, soit aux besoins des animaux de compagnie"
-					case "Convocation": detailText = "Convocations judiciaires ou administratives et déplacements pour se rendre dans un service public"
-					case "Missions": detailText = "Participation à des missions d'intérêt général sur demande de l'autorité administrative"
-					case "Enfants": detailText = "Déplacements pour chercher les enfants à l’école et à l’occasion de leurs activités périscolaires"
+						
+					case "Travail": detailText = "Déplacements entre le domicile et le lieu d'exercice de l'activité professionnelle ou le lieu d'enseignement et de formation, déplacements professionnels ne pouvant être différés"
+						
+					case "Santé": detailText = "Déplacements pour des consultations et soins ne pouvant être assurés à distance et ne pouvant être différés ou pour l'achat de produits de santé"
+						
+					case "Famille": detailText = "Déplacements pour motif familial impérieux, pour l'assistance aux personnes vulnérables ou précaires ou pour la garde d'enfants"
+						
+					case "Accompagnement": detailText = "Déplacements des personnes en situation de handicap et de leur accompagnant"
+						
+					case "Convocation": detailText = "Déplacements pour répondre à une convocation judiciaire ou administrative"
+						
+					case "Missions": detailText = "Déplacements pour participer à des missions d'intérêt général sur demande de l'autorité administrative"
+						
+					case "Transport": detailText = "Déplacements liés à des transits ferroviaires, aériens ou en bus pour des déplacements de longues distances"
+						
+					case "Animaux": detailText = "Déplacements brefs, dans un rayon maximal d'un kilomètre autour du domicile pour les besoins des animaux de compagnie"
+						
 					default: detailText = ""
 					}
 					(cell as! MotifCell).detailTextLabel!.text = detailText

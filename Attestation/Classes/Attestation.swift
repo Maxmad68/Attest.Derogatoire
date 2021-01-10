@@ -72,22 +72,22 @@ class Attestation {
 //
 		
 		// Draw on PDF
-		page1?.drawText("\(firstName ?? "") \(name ?? "")", x: 107, y:657 - 9)
-		page1?.drawText(bDate, x: 107, y: 627 - 9)
-		page1?.drawText(birthPlace!, x: 240, y: 627 - 9)
-		page1?.drawText(addressText, x: 124, y: 597 - 9)
+		page1?.drawText("\(firstName ?? "") \(name ?? "")", x: 119, y: 665 - 9)
+		page1?.drawText(bDate, x: 119, y: 645 - 9)
+		page1?.drawText(birthPlace!, x: 312, y: 645 - 9)
+		page1?.drawText(addressText, x: 133, y: 625 - 9)
 		
-		page1?.drawText(city!, x: 93, y: 126 - 11)
-		page1?.drawText(outDateString, x: 76, y: 94 - 9)
-		page1?.drawText(outHourString, x: 246, y: 94 - 9)
+		page1?.drawText(city!, x: 105, y: 286 - 8)
+		page1?.drawText(outDateString, x: 91, y: 267 - 9)
+		page1?.drawText(outHourString, x: 312, y: 267 - 9)
 		
 		// Tick motifs
 		
 		for motif in motifs {
-			let yTicks = [487, 417, 371, 349, 316, 294, 212, 179, 157]
+			let yTicks = [540, 508, 474, 441, 418, 397, 363, 330]
 			let chosenY = yTicks[motif]
 			
-			page1?.drawText("x", x: 56, y: chosenY - 4, size: 18)
+			page1?.drawText("X", x: 73 - 4, y: chosenY - 8, size: 15)
 		}
 		
 		
@@ -100,14 +100,25 @@ class Attestation {
 			let bounds = page2.bounds(for: PDFDisplayBox.mediaBox)
 			let size = bounds.size
 			
-			let imageAnnotation = PDFImageAnnotation(qr, bounds: CGRect(x: 50, y: size.height - 350, width: 300, height: 300), properties: nil)
+			let imageAnnotation = PDFImageAnnotation(qr, bounds:
+														CGRect(x: 50,
+															   y: size.height - 350,
+															   width: 300,
+															   height: 300
+														), properties: nil)
+			
 			page2.addAnnotation(imageAnnotation)
 			
 			// Draw QR on first page, on botton-right corner
 			let bounds1 = page1!.bounds(for: PDFDisplayBox.mediaBox)
 			let size1 = bounds1.size
 			
-			let imageAnnotation2 = PDFImageAnnotation(qr, bounds: CGRect(x: size1.width - 138, y: 35, width: 110, height: 110), properties: nil)
+			let imageAnnotation2 = PDFImageAnnotation(qr, bounds:
+														CGRect(x: size1.width - 156,
+															   y: 125,
+															   width: 92,
+															   height: 92
+														),properties: nil)
 			page1!.addAnnotation(imageAnnotation2)
 		}
 		pdfDocument.insert(page2, at: 1)
@@ -138,7 +149,7 @@ class Attestation {
 		// Get motifs string
 		var motifsStrings: [String] = []
 		for motif in self.motifs {
-			motifsStrings.append(["travail","achats_culturel_cultuel","sante","famille","handicap","sport_animaux","convocation","missions","enfants"][motif])
+			motifsStrings.append(["travail","sante","famille","handicap","convocation","missions", "transits", "animaux"][motif])
 		}
 		let motifsString = motifsStrings.joined(separator: ", ")
 		
